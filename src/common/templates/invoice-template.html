@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+      h1 {
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      tfoot td {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HÓA ĐƠN BÁN HÀNG</h1>
+    <p><strong>Khách hàng:</strong> {{customerName}}</p>
+    <p><strong>SĐT:</strong> {{customerPhone}}</p>
+    <p><strong>Địa chỉ:</strong> {{customerAddress}}</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên sản phẩm</th>
+          <th>SL</th>
+          <th>Đơn giá</th>
+          <th>Giá sau chiết khấu của sản phẩm</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{productRows}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">Chiết khấu</td>
+          <td>{{discount}}</td>
+        </tr>
+        <tr>
+          <td colspan="4">Tổng tiền</td>
+          <td>{{total}}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

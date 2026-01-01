@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .summary-cards {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .summary-card {
+            flex: 1;
+            min-width: 120px;
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .card-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1890ff;
+        }
+
+        .card-label {
+            font-size: 10px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .order-header {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        .order-item {
+            background-color: #fff;
+        }
+
+        .total-row {
+            background-color: #e8f4fd;
+            font-weight: bold;
+        }
+
+        .profit-positive {
+            color: #52c41a;
+        }
+
+        .profit-negative {
+            color: #f5222d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">BÁO CÁO CHI TIẾT SẢN PHẨM ĐÃ BÁN</div>
+        <div class="subtitle">{{period}}</div>
+        <div class="info">Công ty TNHH Quản Lý Bán Hàng</div>
+        <div class="info">Ngày xuất: {{exportDate}}</div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+        <div class="summary-card">
+            <div class="card-value">{{totalOrders}}</div>
+            <div class="card-label">Tổng Hóa Đơn</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{totalProducts}}</div>
+            <div class="card-label">Tổng Sản Phẩm</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{totalQuantity}}</div>
+            <div class="card-label">Tổng Số Lượng</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{totalSellPrice}}</div>
+            <div class="card-label">Tổng Doanh Thu</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{totalProfit}}</div>
+            <div class="card-label">Tổng Lợi Nhuận</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{totalDebt}}</div>
+            <div class="card-label">Tổng Công Nợ</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{actualRevenue}}</div>
+            <div class="card-label">DT Thực Tế</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-value">{{actualProfit}}</div>
+            <div class="card-label">LN Thực Tế</div>
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 70px;">Hóa Đơn</th>
+                <th style="width: 60px;">Ngày</th>
+                <th style="width: 90px;">Khách Hàng</th>
+                <th style="width: 120px;">Sản Phẩm</th>
+                <th style="width: 40px;">SL</th>
+                <th style="width: 70px;">Đơn Giá</th>
+                <th style="width: 70px;">Thành Tiền</th>
+                <th style="width: 70px;">Giá Vốn</th>
+                <th style="width: 70px;">Tổng Vốn</th>
+                <th style="width: 70px;">Lợi Nhuận</th>
+                <th style="width: 70px;">Công Nợ</th>
+                <th style="width: 70px;">DT Thực Tế</th>
+                <th style="width: 70px;">LN Thực Tế</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{salesRows}}
+        </tbody>
+    </table>
+
+    <!-- Summary Row -->
+    <table style="margin-top: 10px;">
+        <tr class="total-row">
+            <td style="width: 70px;" class="text-center"><strong>TỔNG CỘNG</strong></td>
+            <td style="width: 60px;" class="text-center">{{totalOrders}} HĐ</td>
+            <td style="width: 90px;" class="text-center">{{totalProducts}} SP</td>
+            <td style="width: 120px;" class="text-center">{{totalQuantity}} SP</td>
+            <td style="width: 40px;" class="text-center">{{totalQuantity}}</td>
+            <td style="width: 70px;" class="text-center">-</td>
+            <td style="width: 70px;" class="text-right"><strong>{{totalSellPrice}}</strong></td>
+            <td style="width: 70px;" class="text-center">-</td>
+            <td style="width: 70px;" class="text-right"><strong>{{totalCostPrice}}</strong></td>
+            <td style="width: 70px;" class="text-right"><strong>{{totalProfit}}</strong></td>
+            <td style="width: 70px;" class="text-right"><strong>{{totalDebt}}</strong></td>
+            <td style="width: 70px;" class="text-right"><strong>{{actualRevenue}}</strong></td>
+            <td style="width: 70px;" class="text-right"><strong>{{actualProfit}}</strong></td>
+        </tr>
+    </table>
+</body>
+
+</html>
